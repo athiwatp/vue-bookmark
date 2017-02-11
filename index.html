@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <br>
+    <div class="container" id="app">
+        <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Bookmark Application using Vue and Nedb</h3>
+        </div>
+        <div class="panel-body">
+            <form v-on:submit.prevent="addBookmark()">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" v-model="bookmark_title" class="form-control" id="title" placeholder="Bookmark Title">
+                </div>
+                <div class="form-group">
+                    <label for="title">Link</label>
+                    <input type="text" v-model="bookmark_link" class="form-control" id="title" placeholder="Bookmark Link">
+                </div>
+                <button type="submit" class="btn btn-primary" v-if="addButton">Add Bookmark</button>
+                <div v-if="editButtons">
+                    <button type="button" class="btn btn-primary" v-on:click="updateBookmark()" >Update Bookmark</button>
+                    <button type="button" class="btn btn-default" v-on:click="cancelEdit()" >Cancel</button>
+                </div>
+                
+            </form> <hr>
+            <div class="">
+                <h3>Bookmark List</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Link</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="bookmark in bookmarks">
+                            <td>{{bookmark.title}}</td>
+                            <td>{{bookmark.link}}</td>
+                            <td>
+                                <button class="btn btn-info" v-on:click="editBookmark(bookmark)">Edit</button>
+                                <button class="btn btn-danger" v-on:click="removeBookmark(bookmark)">Remove</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script src="bower_components/vue/dist/vue.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
